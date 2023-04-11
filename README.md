@@ -1,1 +1,1 @@
-# Lexart
+# Lexar
