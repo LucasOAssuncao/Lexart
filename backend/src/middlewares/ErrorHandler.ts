@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import IError from '../Interfaces/IError';
+import IError from '../interfaces/IError';
 import { mapError } from '../utils/mapError';
 
 class ErrorHandler {

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_DB_URL = 'mongodb://localhost:27017/PortfolioDB';
+const MONGO_DB_URL = 'mongodb://localhost:27017/lexartdb';
 
 const connectToDatabase = (
   mongoDatabaseURI = process.env.MONGO_URI

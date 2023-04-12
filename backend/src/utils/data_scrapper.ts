@@ -1,8 +1,9 @@
 import * as puppeteer from 'puppeteer';
-import IScrapper from '../Interfaces/IScrapper';
+import IProduct from '../interfaces/IProduct';
+import IScrapper from '../interfaces/IScrapper';
 
-async function meliScrapper(category: string) {
-  const browser = await puppeteer.launch({ headless: false });
+async function meliScrapper(category: string): Promise<IProduct[]> {
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`https://lista.mercadolivre.com.br/${category}`);
   try {
@@ -27,16 +28,15 @@ async function meliScrapper(category: string) {
       }));
     }, category);
     await browser.close();
-    return productsInfo;
+    return productsInfo as IProduct[];
   } catch (e) {
     throw e;
   }
 }
 
-async function buscapeScrapper(category: string) {
-  const browser = await puppeteer.launch({ headless: false });
+async function buscapeScrapper(category: string): Promise<IProduct[]>  {
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  // page.setJavaScriptEnabled(false)
   await page.goto(`https://www.buscape.com.br/${category}`);
   try {
     const productsInfo = await page.evaluate((category) => {
@@ -61,21 +61,19 @@ async function buscapeScrapper(category: string) {
         })
       );
     }, category);
-    // await browser.close();
-    console.log(productsInfo);
+    await browser.close();
+    return productsInfo as IProduct[];
   } catch (e) {
     throw e;
   }
 }
 
-export async function infoScrapper({ url, category }: IScrapper) {
+export async function infoScrapper({ url, category }: IScrapper): Promise<IProduct[]> {
   switch (url) {
     case 'mercadolivre':
-      meliScrapper(category);
-      break;
+      return meliScrapper(category);
     case 'buscape':
-      buscapeScrapper(category);
-      break;
+      return buscapeScrapper(category);
   }
 }
 

@@ -1,47 +1,5 @@
 version: '3.9'
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - 5173:5173
-    working_dir: /frontend
-    volumes:
-      - ./frontend:/frontend
-    depends_on:
-     - backend
-  backend:
-    # Imagem base do container
-    image: node:16.14
-    # Nome do container para facilitar execução
-    container_name: lexart
-    # Caminho da Dockerfile
-    build: ./backend
-    # Mesmo que `docker run -t`
-    tty: true
-    # Mesmo que `docker run -i`
-    stdin_open: true
-    # Substitui o comando padrão da imagem do node
-    command: bash
-    # Restarta a imagem caso algo a faça parar
-    restart: always
-    # Diretório padrão de execução
-    working_dir: /backend
-    # Lista de volumes (diretórios) mapeados de fora para dentro do container
-    volumes:
-      # Monta o diretório atual, com todos os dados do projeto, 
-      # dentro do diretório /app
-      - ./backend:/backend
-    # Lista de serviços do qual este serviço depende
-    depends_on:
-      # Precisa do mongo funcionando antes de subir o node
-      - mongodb
-    # Lista de portas mapeadas de dentro para fora do container
-    # na notação porta_de_fora:porta_de_dentro
-    ports:
-      # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
-      - 3001:3001
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/Lexart
   mongodb:
     image: mongo:5.0.7
     container_name: lexartdb

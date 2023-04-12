@@ -6,7 +6,7 @@ import {
   isValidObjectId,
   UpdateQuery,
 } from 'mongoose';
-import IError from '../Interfaces/IError';
+import IError from '../interfaces/IError';
 
 abstract class AbstractODM<T> {
   protected model: Model<T>;
@@ -30,28 +30,6 @@ abstract class AbstractODM<T> {
 
   public async get(): Promise<T[]> {
     return this.model.find();
-  }
-
-  public async find(id: string): Promise<T | null> {
-    this.validateMongoId(id);
-
-    return this.model.findOne({ _id: id });
-  }
-
-  public async findOneAndUpdate(id: string, obj: T): Promise<T | null> {
-    this.validateMongoId(id);
-
-    return this.model.findOneAndUpdate(
-      { _id: id },
-      { ...obj } as UpdateQuery<T>,
-      { new: true }
-    );
-  }
-
-  public async findByIdAndRemove(id: string) {
-    this.validateMongoId(id);
-
-    return this.model.findByIdAndDelete(id);
   }
 }
 
