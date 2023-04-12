@@ -36,6 +36,7 @@ async function meliScrapper(category: string) {
 async function buscapeScrapper(category: string) {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
+  // page.setJavaScriptEnabled(false)
   await page.goto(`https://www.buscape.com.br/${category}`);
   try {
     const productsInfo = await page.evaluate((category) => {
@@ -44,7 +45,12 @@ async function buscapeScrapper(category: string) {
       ) as HTMLAnchorElement[];
       return Array.from(document.querySelectorAll('.Card_Card__LsorJ')).map(
         (product, i) => ({
-          photo: product.querySelector('img')?.getAttribute('src') || '',
+          photo:
+            product
+              .querySelector('noscript')
+              ?.textContent?.match(/src="([^"]*)"/)?.[1] ||
+            product.querySelector('img')?.getAttribute('src') ||
+            '',
           description: product.querySelector('h2')?.textContent || '',
           price:
             product.querySelector(
@@ -55,8 +61,8 @@ async function buscapeScrapper(category: string) {
         })
       );
     }, category);
-    await browser.close();
-    return productsInfo;
+    // await browser.close();
+    console.log(productsInfo);
   } catch (e) {
     throw e;
   }
@@ -72,3 +78,5 @@ export async function infoScrapper({ url, category }: IScrapper) {
       break;
   }
 }
+
+infoScrapper({ url: 'buscape', category: 'celular' });
