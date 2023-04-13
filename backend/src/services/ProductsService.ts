@@ -15,7 +15,6 @@ export default async function getAll(args: IScrapper): Promise<IInfo> {
   const products = await infoScrapper({ url, category });
   await productsODM.deleteMany();
   const data = await productsODM.create({ url, category, data: products });
-  console.log(data);
   
   return data;
 }
