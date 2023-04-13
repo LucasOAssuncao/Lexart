@@ -6,7 +6,7 @@ import IInfo from '../interfaces/IInfo';
 export default async function getAll(args: IScrapper): Promise<IInfo> {
   const { url, category } = args;
   const productsODM = new ProductsODM();
-  const storedInfo = await productsODM.find(url, category);
+  const storedInfo = await productsODM.find(url as string, category);
   
   if (storedInfo) {
     return storedInfo;

@@ -16,7 +16,10 @@ async function meliScrapper(category: string): Promise<IProduct[]> {
       return Array.from(
         document.querySelectorAll('.ui-search-layout__item')
       ).map((product, i) => ({
-        photo: product.querySelector('img')?.src || '',
+        photo:
+          product.querySelector('img[data-src]')?.getAttribute('data-src') ||
+          product.querySelector('img')?.getAttribute('src') ||
+          '',
         description:
           product.querySelector('.ui-search-item__title')?.textContent || '',
         price:
@@ -34,7 +37,7 @@ async function meliScrapper(category: string): Promise<IProduct[]> {
   }
 }
 
-async function buscapeScrapper(category: string): Promise<IProduct[]>  {
+async function buscapeScrapper(category: string): Promise<IProduct[]> {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`https://www.buscape.com.br/${category}`);
@@ -68,12 +71,23 @@ async function buscapeScrapper(category: string): Promise<IProduct[]>  {
   }
 }
 
-export async function infoScrapper({ url, category }: IScrapper): Promise<IProduct[]> {
+async function mergeInfo(category: string): Promise<IProduct[]> {
+  const mercadoLivre = await meliScrapper(category);
+  const buscape = await buscapeScrapper(category);
+  return [...mercadoLivre, ...buscape];
+}
+
+export async function infoScrapper({
+  url,
+  category,
+}: IScrapper): Promise<IProduct[]> {
   switch (url) {
     case 'mercadolivre':
       return meliScrapper(category);
     case 'buscape':
       return buscapeScrapper(category);
+    default:
+      return mergeInfo(category);
   }
 }
 

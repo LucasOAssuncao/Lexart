@@ -1,4 +1,4 @@
 export default interface IScrapper {
-    url: 'mercadolivre' | 'buscape';
+    url: 'mercadolivre' | 'buscape' | 'todas';
     category: 'tv' | 'geladeira' | 'celular';
 }
