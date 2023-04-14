@@ -8,18 +8,29 @@ interface props {
 }
 
 const Home: FC<props> = ({ products, isLoading }) => {
+  const options = { style: 'currency', currency: 'BRL' };
+  const numberFormat = new Intl.NumberFormat('pt-br', options);
   return (
-    <div className="">
+    <div className='p-[20px]'>
       {isLoading && <Loading />}
       {!isLoading && products && (
-        <div>
+        <div className='sm:flex sm:flex-col gap-5'>
           {products.map((product, e) => (
-            <div key={e}>
-              <img src={product.photo} />
-              <a href={product.link}>
-              <p>{product.description}</p>
-              </a>
-              <span>{product.price}</span>
+            <div
+              className='flex p-6 bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'
+              key={e}
+            >
+              <div className='flex items-start sm:w-[250px] sm:h-[200px]'>
+                <img className='sm:w-[100%]' src={product.photo} />
+              </div>
+              <div className='p-2 flex flex-col gap-3'>
+                <a href={product.link}>
+                  <p className='sm:text-[12px]'>{product.description}</p>
+                </a>
+                <span className='sm:text-[22px] font-bold'>{`${numberFormat.format(
+                  Number(product.price.replace('.', '').replace(',', '.'))
+                )}`}</span>
+              </div>
             </div>
           ))}
         </div>

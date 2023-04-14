@@ -40,7 +40,7 @@ const Header: FC<props> = ({ infoFetch }) => {
             <option value='celular'>Celular</option>
           </select>
         </div>
-        <div className='flex mb-2 sm:w-[100%] sm:justify-center md:w-[60%] lg:w-[40%]'>
+        <div className='flex mb-2 pr-5 pl-1 sm:w-[100%] sm:justify-center md:w-[60%] lg:w-[40%]'>
           <input
             type='text'
             name='filter'
@@ -53,6 +53,10 @@ const Header: FC<props> = ({ infoFetch }) => {
             className='text-sm font-medium w-20 text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
             onClick={(e) => {
               e.preventDefault();
+              if (!url || !category) {
+                window.alert('Escolha a web e a categoria.');
+                return;
+              }
               infoFetch(url, category, filter);
             }}
           >

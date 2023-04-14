@@ -58,7 +58,7 @@ async function buscapeScrapper(category: string): Promise<IProduct[]> {
           price:
             product.querySelector(
               '[role="button"] .Text_Text__h_AF6.Text_MobileHeadingS__Zxam2'
-            )?.textContent || '',
+            )?.textContent?.replace(/[^0-9\.-]+/,"") || '',
           link: productsUrls[i].href || '',
           category,
         })
