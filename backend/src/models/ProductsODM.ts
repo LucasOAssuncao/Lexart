@@ -16,6 +16,7 @@ class ProductsODM extends AbstractODM<IInfo> {
           description: { type: String, required: true },
           price: { type: String },
           category: { type: String, required: true },
+          link: { type: String, required: true },
         },
       ],
     });

@@ -13,7 +13,9 @@ const Home: FC<props> = ({ products }) => {
           {products.map((product, e) => (
             <div key={e}>
               <img src={product.photo} />
+              <a href={product.link}>
               <p>{product.description}</p>
+              </a>
               <span>{product.price}</span>
             </div>
           ))}
