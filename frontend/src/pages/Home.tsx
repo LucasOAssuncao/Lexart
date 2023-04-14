@@ -9,9 +9,9 @@ interface props {
 
 const Home: FC<props> = ({ products, isLoading }) => {
   return (
-    <div>
+    <div className="">
       {isLoading && <Loading />}
-      {products && (
+      {!isLoading && products && (
         <div>
           {products.map((product, e) => (
             <div key={e}>
