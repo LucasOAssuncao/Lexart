@@ -11,6 +11,8 @@ Este é um projeto desenvolvido como parte do processo seletivo da Lexart. A apl
 - Vite.js
 - TypeScript
 
+## Você pode usar a aplicação pelo deploy `https://lexart.vercel.app/`ou pode instalar.
+
 ## Instalação
 
 Para instalar as dependências do projeto, execute o seguinte comando na pasta do backend:
