@@ -24,7 +24,8 @@ async function meliScrapper(category: string): Promise<IProduct[]> {
 }
 
 async function buscapeScrapper(category: string): Promise<IProduct[]> {
-  const response = await axios.get(`https://www.buscape.com.br/${category}`);
+  const url = `https://www.buscape.com.br/`
+  const response = await axios.get(`${url}${category}`);
   const dom = new JSDOM(response.data, { runScripts: "dangerously" });
   const productsUrls = Array.from(
     dom.window.document.querySelectorAll('.Card_Card__LsorJ > a')
@@ -37,7 +38,7 @@ async function buscapeScrapper(category: string): Promise<IProduct[]> {
     description: product.querySelector('h2')?.textContent || '',
     price:
       product.querySelector('[role="button"] .Text_Text__h_AF6.Text_MobileHeadingS__Zxam2')?.textContent?.replace(/[^0-9\.-]+/,'') || '',
-    link: productsUrls[i].href || '',
+    link: `${url}${productsUrls[i].href}` || '',
     category,
   })) as IProduct[];
 }
