@@ -1,8 +1,19 @@
 import 'dotenv/config';
+import request from 'request';
 import app from './app';
 import connectToDatabase from './models/Connection';
 
 const PORT = process.env.PORT || 3001;
+
+const test = () => {
+	setInterval(() => {
+		request(`https://api-lexart.onrender.com/healthz`, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				console.log(`Never sleeps! Running server on port: ${PORT}`);
+			}
+		});
+	}, 60000);
+};
 
 connectToDatabase()
   .then(() => {

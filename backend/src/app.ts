@@ -9,6 +9,8 @@ app.use(cors());
 
 app.use('/products', productsRouter);
 
+app.get('/healthz', (_req, res) => res.status(200).json({ message: "OK!" }));
+
 
 app.use(ErrorHandler.handle);
 export default app;
