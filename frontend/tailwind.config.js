@@ -10,10 +10,10 @@ export default {
       'md': '620px',
       // => @media (min-width: 820px)
 
-      'lg': '1366px',
+      'lg': '800px',
       // => @media (min-width: 1366px)
 
-      'xl': '1920px',
+      'xl': '1000px',
       // => @media (min-width: 1920px)
 
       'xxl': '2400px',
