@@ -25,7 +25,7 @@ const Home: FC<props> = ({ products, isLoading }) => {
               </div>
               <div className='p-2 flex flex-col gap-3 items-center justify-center text-center sm:w-[100%]'>
                 <a href={product.link} target="_blank">
-                  <p className='hover:text-gray-600 transition-colors duration-300 sm:text-[13px] md:text-[20px]'>{product.description}</p>
+                  <p className='hover:text-gray-600 hover:font-medium transition-colors duration-100 sm:text-[13px] md:text-[20px]'>{product.description}</p>
                 </a>
                 <span className='sm:text-[22px] md:text-[24px] font-bold'>{`${numberFormat.format(
                   Number(product.price.replace('.', '').replace(',', '.'))
