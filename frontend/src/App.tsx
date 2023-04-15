@@ -12,7 +12,7 @@ function App() {
   function infoFetch(url: string, category: string, filter: string) {
     setIsLoading(true);
     axios
-      .get(`http://localhost:3001/products?url=${url}&category=${category}`)
+      .get(`https://api-lexart.onrender.com/products?url=${url}&category=${category}`)
       .then(({ data }) => {
         setProducts(
           data.data.filter((e: IProduct) =>
