@@ -24,6 +24,10 @@ E depois execute o mesmo comando na pasta do frontend:
 
 `npm install`
 
+Em seguida, inicie o banco de dados MongoDB em um contêiner Docker usando o seguinte comando na pasta do backend:
+
+docker-compose up -d
+
 ## Execução
 
 Backend
